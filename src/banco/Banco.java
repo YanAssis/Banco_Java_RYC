@@ -233,7 +233,7 @@ public class Banco {
         for (int k = 0; k < listaT.size(); k++) {
             limite -= listaT.get(k).valor;
         }
-        
+
         if (limite > valor_troca) {
             JOptionPane.showMessageDialog(null, "Não é possível fazer transferência. Limite insuficiente");
         } else {
@@ -263,7 +263,7 @@ public class Banco {
         for (int k = 0; k < listaT.size(); k++) {
             limite -= listaT.get(k).valor;
         }
-        
+
         if (limite > valor_troca) {
             JOptionPane.showMessageDialog(null, "Não é possível fazer transferência. Limite insuficiente");
         } else {
@@ -303,11 +303,20 @@ public class Banco {
                 try {
                     novoLimiteDouble = Double.parseDouble(novoLimite);
 
-                    if (selectedPerson == pessoas[0])
+                    if (selectedPerson == pessoas[0]) {
                         contasF.get(indice_CLIENTE).setLimite(novoLimiteDouble); // PF
-                    else
-                        contasJ.get(indice_CLIENTE).setLimite(novoLimiteDouble); // PJ
 
+                        contasF.get(indice_CLIENTE)
+                                .setTransacoes(new Transacoes("Alterar Limite", novoLimiteDouble,
+                                        contasF.get(indice_CLIENTE).getNome(),
+                                        "Alteração de Limite", contasF.get(indice_CLIENTE).getSaldo()));
+                    } else {
+                        contasJ.get(indice_CLIENTE).setLimite(novoLimiteDouble); // PJ
+                        contasJ.get(indice_CLIENTE)
+                                .setTransacoes(new Transacoes("Alterar Limite", novoLimiteDouble,
+                                        contasF.get(indice_CLIENTE).getNome(),
+                                        "Alteração de Limite", contasF.get(indice_CLIENTE).getSaldo()));
+                    }
                     IsDouble = true;
                 } catch (NumberFormatException ignore) {
                     JOptionPane.showMessageDialog(null, "Valor inválido");
