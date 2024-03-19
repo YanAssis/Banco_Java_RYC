@@ -18,4 +18,35 @@ Após criar/logar, poderão ser selecionadar as opções de "Saque", "Depósito"
   
 - **Extrato:** Ao executar as operações citadas anteriormente é criado um registro de transação e ao selecionar a opção extrato esses registros são exportados para um arquivo CSV na pasta do projeto.
  
-![MermaidJS](https://github.com/YanAssis/Banco_Java_RYC/assets/99808146/00879d56-b503-43d1-9d0d-350c7127169b)
+```mermaid
+classDiagram
+    Conta <|-- PessoaFisica
+    Conta <|-- PessoaJuridica
+ 
+    Conta : +String nome
+    Conta : +String senha
+    Conta : +String numConta
+    Conta : +String numAgencia
+    Conta : +double saldo
+    Conta : +double limite
+    Conta : +Transacoes[] listaT
+ 
+    Conta: +exportarOperacoes()
+ 
+ 
+    class PessoaFisica{
+      +String CPF
+    }
+ 
+    class PessoaJuridica{
+      +String CNPJ
+    }
+ 
+    class Transacoes{
+      +String operacao
+      +double valor
+      +Sring remetente
+      +String destinatario
+      +doube saldo_final
+    }
+```
